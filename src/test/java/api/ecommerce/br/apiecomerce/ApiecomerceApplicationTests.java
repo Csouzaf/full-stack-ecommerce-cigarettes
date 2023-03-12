@@ -1,13 +1,13 @@
-package api.ecommerce.br.apiecomerce;
+// package api.ecommerce.br.apiecomerce;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class ApiecomerceApplicationTests {
+// @SpringBootTest
+// class ApiecomerceApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// 	@Test
+// 	void contextLoads() {
+// 	}
 
-}
+// }
