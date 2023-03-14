@@ -5,13 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-
 public class RegisterRequest {
 
+    private String fullName;
     private String email;
+    private String phoneNumber;
+    private String cpf;
     private String password;
 }

@@ -1,4 +1,4 @@
-package api.ecommerce.br.apiecommerce.config;
+package api.ecommerce.br.apiecommerce.config.jwt;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +25,7 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailsService() {
        return username -> repository.findByEmail(username)
-            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
       
     }
 

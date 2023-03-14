@@ -1,13 +1,10 @@
 package api.ecommerce.br.apiecommerce.config.auth;
 
-
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import api.ecommerce.br.apiecommerce.config.JwtService;
+import api.ecommerce.br.apiecommerce.config.jwt.JwtService;
 import api.ecommerce.br.apiecommerce.model.UserModel;
 import api.ecommerce.br.apiecommerce.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +25,9 @@ public class AuthenticationService {
 
             .email(request.getEmail())
             .password(passwordEncoder.encode(request.getPassword()))
+            .cpf(request.getCpf())
+            .fullName(request.getFullName())
+            .phoneNumber(request.getPhoneNumber())
             .build();
         
         repository.save(user);
@@ -41,9 +41,8 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-       authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()
-            )
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         
         );
 

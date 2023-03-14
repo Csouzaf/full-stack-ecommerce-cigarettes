@@ -9,6 +9,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import api.ecommerce.br.apiecommerce.config.jwt.JwTAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -27,7 +28,7 @@ public class SecurityUserConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/register").permitAll()
+                .requestMatchers("/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
@@ -35,7 +36,7 @@ public class SecurityUserConfig {
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
+                
         return http.build();
 
     }

@@ -1,4 +1,4 @@
-package api.ecommerce.br.apiecommerce.config;
+package api.ecommerce.br.apiecommerce.config.jwt;
 
 import java.io.IOException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -46,12 +46,13 @@ public class JwTAuthenticationFilter extends OncePerRequestFilter {
             final UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
 
             if (jwtService.isTokenValid(jwt, userDetails)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
 
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authToken);
-            }
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                userDetails, null, userDetails.getAuthorities());
+
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                }
         }
         filterChain.doFilter(request, response);
     }
