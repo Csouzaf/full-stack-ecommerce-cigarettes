@@ -1,8 +1,10 @@
 package api.ecommerce.br.apiecommerce.config.auth;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -11,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 
 @RestController
-
+@RequestMapping("/api")
 @RequiredArgsConstructor
 
 public class AuthenticationController {
@@ -24,11 +26,14 @@ public class AuthenticationController {
         return ResponseEntity.ok(service.register(request));
     }
 
-    @PostMapping("/home")
+    @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticationRequest request) {
 
         return ResponseEntity.ok(service.authenticate(request));
     }
+
+   
+
 
   
 }
