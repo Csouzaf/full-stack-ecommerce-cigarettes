@@ -32,7 +32,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
-
 public class UserModel implements UserDetails{
    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +52,9 @@ public class UserModel implements UserDetails{
 
     @Column(name = "CPF", length = 11)
     private String cpf;
+
+    @Column(name = "address")
+    private String address;
 
     private String password;
     

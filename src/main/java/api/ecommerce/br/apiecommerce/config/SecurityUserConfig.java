@@ -28,7 +28,7 @@ public class SecurityUserConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/signup").permitAll()
+                .requestMatchers("").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

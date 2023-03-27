@@ -28,6 +28,7 @@ public class AuthenticationService {
             .cpf(request.getCpf())
             .fullName(request.getFullName())
             .phoneNumber(request.getPhoneNumber())
+            .address(request.getAddress())
             .build();
         
         repository.save(user);

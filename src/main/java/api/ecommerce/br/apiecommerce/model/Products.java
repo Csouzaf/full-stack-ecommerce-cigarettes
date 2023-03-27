@@ -1,6 +1,6 @@
 package api.ecommerce.br.apiecommerce.model;
 
-import jakarta.annotation.Generated;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,26 +20,26 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "products")
 
-public class ProductsModel {
+public class Products {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "idUser")
-    private Long idUser;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idUser", referencedColumnName = "id")
-    private UserModel userModel;
-
-
-    private String dunhillRed;
-    private String dunhillBlue;
-    private String dunhillOnRed;
-    private String dunhilOnBlue;
+    @Column(nullable = true)
+    private Double dunhillRed;
     
-
+    @Column(nullable = true)
+    private Double dunhillBlue;
+    
+    @Column(nullable = true)
+    private Double dunhillOnRed;
+    
+    @Column(nullable = true)
+    private Double dunhilOnBlue;
+    
+    @Column(nullable = false)
+    private Double sumItems;
 
 
 }
