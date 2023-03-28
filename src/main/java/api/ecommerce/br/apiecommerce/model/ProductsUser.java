@@ -22,9 +22,31 @@ public class ProductsUser {
     @Id
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id")
+    private UserModel idUser;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "code")
+    private Products idProductsUser;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "addres")
+    private UserModel addressUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idUser", referencedColumnName = "id")
-    private UserModel idProductUser;
+    @JoinColumn(referencedColumnName = "fullName")
+    private UserModel fullNameUser;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "quantity")
+    @Column(nullable = false)
+    private Products quantityPaid;
+     
+    @Column(nullable = false)
+    private Double amountPaid;
+
+    @Column(name = "paymentMethod")
+    private String paymentMethod;
 
 }    

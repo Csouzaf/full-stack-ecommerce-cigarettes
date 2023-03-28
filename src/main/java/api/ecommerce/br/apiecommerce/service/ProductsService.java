@@ -1,9 +1,8 @@
 package api.ecommerce.br.apiecommerce.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
+import api.ecommerce.br.apiecommerce.exception.ResourceNotFoundException;
 import api.ecommerce.br.apiecommerce.model.Products;
 import api.ecommerce.br.apiecommerce.repository.ProductsRepository;
 
@@ -13,19 +12,27 @@ public class ProductsService {
     @Autowired
     private ProductsRepository productsRepository;
 
-    @Autowired
-    private Products productsModel;
+    public Products createProducts(Products products){
+       return productsRepository.save(products); 
+    }
 
+    public Products updateProducts(Long code, Products update){
 
+        Products productsExist = productsRepository.findById(code)
+            .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com ID: " + code));
 
-    private final Double dunhillRed = 11.50;
+        productsExist.setQuantity(update.getQuantity());
+        
+        return productsRepository.save(productsExist);
+    }
     
-    
-    private final Double dunhillBlue = 11.50;
-    
+    public void removeProducts(Long code){
 
-    
-    
+        Products productsExist = productsRepository.findById(code)
+            .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com ID: " + code));
+
+        productsRepository.delete(productsExist);
+    }
  
 
 
