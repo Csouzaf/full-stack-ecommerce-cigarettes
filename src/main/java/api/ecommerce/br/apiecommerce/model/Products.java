@@ -1,20 +1,21 @@
 package api.ecommerce.br.apiecommerce.model;
 
+import org.hibernate.annotations.ManyToAny;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -24,18 +25,25 @@ public class Products {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long code;
+    private Long id;
 
-    @Column(nullable = true)
+    //Referenciar o id do produto e do usuário
+
+    // @ManyToOne
+    // @JoinColumn(name = "id")
+    // private ProductsUser productsUser;
+
+    @Column(name = "name", nullable = false)
     private String name;
     
-    @Column(nullable = true)
-    private String quantityStock;
+    @Column(name = "quantity_Stock", nullable = true)
+    private Integer quantityStock;
 
-    @Column(nullable = true)
-    private String quantity;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "quantity_id")
+    private ProductsUser quantity;
 
-    @Column(nullable = false)
+    @Column(name = "unitary_Value", nullable = false)
     private Double unitaryValue;
 
 

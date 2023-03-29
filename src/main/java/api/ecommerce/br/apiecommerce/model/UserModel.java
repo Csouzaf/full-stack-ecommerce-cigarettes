@@ -2,13 +2,19 @@ package api.ecommerce.br.apiecommerce.model;
 
 
 import java.util.Collection;
+
+import java.util.List;
+import org.hibernate.annotations.ManyToAny;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -22,7 +28,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "usersEcommerce")
+@Table(name = "users_ecommerce")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,7 +40,7 @@ public class UserModel implements UserDetails{
     @Id
     private Long id;
 
-    @Column(name = "full_Name")
+   
     private String fullName;
 
     @Column(unique = true)
@@ -43,15 +49,18 @@ public class UserModel implements UserDetails{
     @Pattern(regexp=".+@.+\\..+", message = "Insira um email válido com @ e um domínio")
     private String email;
 
-    @Column(name = "phoneNumber")
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     @Column(name = "CPF", length = 11)
     private String cpf;
 
-    @Column(name = "address")
-    private String address;
+    @OneToMany(mappedBy = "userModel", fetch = FetchType.EAGER)
+    private List<ProductsUser> productUsers;
 
+    private String address;
+    
+    
     private String password;
     
     // @Enumerated(EnumType.STRING)
