@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import api.ecommerce.br.apiecommerce.model.UserModel;
 
-@Repository
+
 public interface UserRepository extends JpaRepository<UserModel, Long>{
     
     Optional<UserModel> findByEmail(String email);
