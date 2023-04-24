@@ -52,7 +52,7 @@ public class UserModel implements UserDetails{
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "CPF", length = 11)
+    @Column(name = "CPF", length = 11, unique = true)
     private String cpf;
 
     @OneToMany(mappedBy = "userModel", fetch = FetchType.EAGER)

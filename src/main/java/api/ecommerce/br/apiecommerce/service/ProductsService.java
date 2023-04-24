@@ -25,7 +25,8 @@ public class ProductsService {
     public Products updateProducts(Long code, Products products){
 
         Products productsExist = productsRepository.findById(code)
-            .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com ID: " + code));
+            .orElseThrow(() ->
+             new ResourceNotFoundException("Produto não encontrado com ID: " + code));
 
         productsExist.setQuantity(products.getQuantity());
         
