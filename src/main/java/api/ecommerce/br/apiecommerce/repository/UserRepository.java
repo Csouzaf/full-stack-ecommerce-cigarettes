@@ -9,5 +9,7 @@ import api.ecommerce.br.apiecommerce.model.UserModel;
 @Repository
 public interface UserRepository extends JpaRepository<UserModel, Long>{
     
-    Optional<UserModel> findByEmail(String email);
+    UserModel findByEmail(String email);
+
+    // Optional<UserModel> findByEmail(String email);
 }
