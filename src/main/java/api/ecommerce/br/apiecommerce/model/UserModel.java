@@ -2,9 +2,10 @@ package api.ecommerce.br.apiecommerce.model;
 
 
 import java.util.Collection;
-
+import java.util.Optional;
 import java.util.List;
 import org.hibernate.annotations.ManyToAny;
+import org.springframework.data.util.Optionals;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import jakarta.persistence.Column;
@@ -34,7 +35,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
-public class UserModel implements UserDetails{
+public class UserModel implements  UserDetails{
    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
