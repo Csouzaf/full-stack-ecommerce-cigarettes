@@ -1,22 +1,40 @@
 
+header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header h1{
+  color:rgb(255, 255, 255);
+  font-size: 2.1rem;
+}
+
+.title{
+  position:relative;
+  right: 15%;
+
+}
+
 .main-div{
 
   background-color: #102d62;
   border-radius: 0rem 0rem 1.8rem 1.8rem;
   border-bottom: 1.3rem #102d62 solid;
 
-
 }
-
-
 
 span{
   color: rgb(255, 255, 255);
   display: flex;
-  justify-content: space-between;
   text-align: center;
 
 }
+
+span i {
+  margin: 5px;
+  font-size: 0.9em;
+}
+
 
 .color-name-nav{
   background-color: #0003;
@@ -25,22 +43,17 @@ span{
 form button {
   margin-left: 30px;
 }
+
 h2 {
   font-size: 1.4rem;
   color: #d7d7d9;
-}
-header h1{
-  position: relative;
-  right: 15%;
-  color:rgb(255, 255, 255);
+  text-shadow: 0 0 20px;
 }
 
-header{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+.navbar-toggler{
+  margin:0 3rem;
 
+}
 // li{
 //   display: flex;
 //   justify-content: space-between;
