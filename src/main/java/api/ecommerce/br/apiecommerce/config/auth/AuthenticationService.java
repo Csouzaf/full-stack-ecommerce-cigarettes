@@ -5,6 +5,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import api.ecommerce.br.apiecommerce.config.jwt.JwtService;
+import api.ecommerce.br.apiecommerce.model.Role;
 import api.ecommerce.br.apiecommerce.model.UserModel;
 import api.ecommerce.br.apiecommerce.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ public class AuthenticationService {
             .fullName(request.getFullName())
             .phoneNumber(request.getPhoneNumber())
             .address(request.getAddress())
+            .role(Role.USER)
             .build();
         
         repository.save(user);

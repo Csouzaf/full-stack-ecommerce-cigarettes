@@ -39,9 +39,9 @@ public class Products {
     @Column(name = "quantity_Stock", nullable = true)
     private Integer quantityStock;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "quantity_id")
-    private ProductsUser quantity;
+    // @ManyToOne(fetch = FetchType.EAGER)
+    // @JoinColumn(name = "quantity_id")
+    // private ProductsUser quantity;
 
     @Column(name = "unitary_Value", nullable = false)
     private Double unitaryValue;

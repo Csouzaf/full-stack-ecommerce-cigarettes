@@ -6,10 +6,14 @@ import java.util.Optional;
 import java.util.List;
 import org.hibernate.annotations.ManyToAny;
 import org.springframework.data.util.Optionals;
+import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,13 +39,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
-public class UserModel implements  UserDetails{
+public class UserModel implements UserDetails{
    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-
-   
+    
     private String fullName;
 
     @Column(unique = true)
@@ -56,21 +59,23 @@ public class UserModel implements  UserDetails{
     @Column(name = "CPF", length = 11, unique = true)
     private String cpf;
 
-    @OneToMany(mappedBy = "userModel", fetch = FetchType.EAGER)
-    private List<ProductsUser> productUsers;
+    // @OneToMany(mappedBy = "userModel", fetch = FetchType.EAGER)
+    // private List<ProductsUser> productUsers;
 
     private String address;
     
-    
     private String password;
-    
-    // @Enumerated(EnumType.STRING)
-    // private Role role;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // return List.of(new SimpleGrantedAuthority(role.name()))
-        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+        return List.of(new SimpleGrantedAuthority(role.name()));
+
+        // throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+        
         // return List.of(new SimpleGrantedAuthority(role.email));
     }
 
@@ -78,6 +83,11 @@ public class UserModel implements  UserDetails{
     public String getUsername() {
         
         return email;
+    }
+
+    @Override
+    public String getPassword(){
+        return password;
     }
 
     @Override
@@ -100,6 +110,7 @@ public class UserModel implements  UserDetails{
         return true;
     }
 
+   
    
    
 

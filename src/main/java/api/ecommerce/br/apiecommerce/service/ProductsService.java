@@ -28,7 +28,7 @@ public class ProductsService {
             .orElseThrow(() ->
              new ResourceNotFoundException("Produto não encontrado com ID: " + code));
 
-        productsExist.setQuantity(products.getQuantity());
+        productsExist.setQuantityStock(products.getQuantityStock());
         
         
         return productsRepository.save(productsExist);

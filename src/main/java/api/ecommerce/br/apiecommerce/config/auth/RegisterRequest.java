@@ -1,6 +1,6 @@
 package api.ecommerce.br.apiecommerce.config.auth;
 
-import api.ecommerce.br.apiecommerce.model.ProductsUser;
+import api.ecommerce.br.apiecommerce.model.Products;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,4 +18,5 @@ public class RegisterRequest {
     private String cpf;
     private String password;
     private String address;
+    
 }
