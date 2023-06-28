@@ -15,25 +15,25 @@ Project Ecommerce Cigarettes
 3. Configure Spring Boot:
 
 > In application.properties, past: <br>
->>spring.jpa.hibernate.ddl-auto = update 
->>spring.datasource.url = jdbc:mysql://${MYSQL_HOST:localhost}:3306/**Name of your Database**
->>spring.datasource.username = root
+>>spring.jpa.hibernate.ddl-auto = update <br>
+>>spring.datasource.url = jdbc:mysql://${MYSQL_HOST:localhost}:3306/**Name of your Database**<br>
+>>spring.datasource.username = root<br>
 >>spring.datasource.password = **Password of your MySQL** <br><br>
 
 4. Signinup and Login User Spring Boot:
   >Create user and login. Past in Postman in the router: **http://localhost:8080/auth/signup** and complete the JSON bellow:<br>
 
   >>{  
-  >>"fullName": "",
-  >>"email": "",
-  >>"phoneNumber": "",
-  >>"cpf":"",
-  >>"password": "",
-  >>"address":"",
+  >>"fullName": "",<br>
+  >>"email": "",<br>
+  >>"phoneNumber": "",<br>
+  >>"cpf":"",<br>
+  >>"password": "",<br>
+  >>"address":"",<br>
   >>"role":"USER" <br>
   
   >After this, do login: **http://localhost:8080/auth/login** and complete the JSON bellow, with user created:<br>
-   >>"email": "",
-   >>"password": "",
+   >>"email": "",<br>
+   >>"password": "",<br>
 
 }
