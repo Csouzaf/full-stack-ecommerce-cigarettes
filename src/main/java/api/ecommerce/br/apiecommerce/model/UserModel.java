@@ -1,36 +1,16 @@
 package api.ecommerce.br.apiecommerce.model;
 
-
-import java.util.Collection;
-import java.util.Optional;
-import java.util.List;
+import java.util.*;
 import org.hibernate.annotations.ManyToAny;
 import org.springframework.data.util.Optionals;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import jakarta.validation.constraints.Pattern.Flag;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-
+import lombok.*;
 
 @Entity
 @Table(name = "users_ecommerce")
@@ -65,6 +45,11 @@ public class UserModel implements UserDetails{
     private String address;
     
     private String password;
+
+    @OneToOne(mappedBy = "userModel")
+    private UserEmail userEmail;
+
+
 
     @Enumerated(EnumType.STRING)
     private Role role;

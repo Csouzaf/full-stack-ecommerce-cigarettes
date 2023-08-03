@@ -32,7 +32,6 @@ public class Products {
     // @ManyToOne
     // @JoinColumn(name = "id")
     // private ProductsUser productsUser;
-
     @Column(name = "name", nullable = false)
     private String name;
     
