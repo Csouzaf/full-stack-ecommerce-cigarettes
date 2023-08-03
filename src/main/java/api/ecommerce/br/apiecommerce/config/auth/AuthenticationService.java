@@ -6,7 +6,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import api.ecommerce.br.apiecommerce.config.jwt.JwtService;
 import api.ecommerce.br.apiecommerce.model.Role;
+import api.ecommerce.br.apiecommerce.model.UserEmail;
 import api.ecommerce.br.apiecommerce.model.UserModel;
+import api.ecommerce.br.apiecommerce.repository.UserEmailRepository;
 import api.ecommerce.br.apiecommerce.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +21,8 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final UserEmailRepository userEmailRepository;
+   
 
     public AuthenticationResponse register(RegisterRequest request) {
 
@@ -34,6 +38,18 @@ public class AuthenticationService {
             .build();
         
         repository.save(user);
+
+        UserEmail userEmail = new UserEmail();
+
+        userEmail.setEmail(request.getEmail());
+        userEmail.setCpf(request.getCpf());
+        userEmail.setFullName(request.getFullName());
+
+        userEmail.setUserModel(user);
+
+        //    repository.save(user.setEmail(userEmail));
+
+        userEmailRepository.save(userEmail);
         
         var jwtToken = jwtService.generatedToken(user);
         

@@ -50,7 +50,6 @@ public class UserModel implements UserDetails{
     private UserEmail userEmail;
 
 
-
     @Enumerated(EnumType.STRING)
     private Role role;
 

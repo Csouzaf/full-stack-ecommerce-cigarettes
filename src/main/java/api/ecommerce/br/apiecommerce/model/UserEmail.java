@@ -1,5 +1,7 @@
 package api.ecommerce.br.apiecommerce.model;
 
+
+
 import jakarta.persistence.*;
 import lombok.Data;
 
