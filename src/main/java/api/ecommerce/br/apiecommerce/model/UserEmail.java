@@ -21,7 +21,16 @@ public class UserEmail {
     
     private String cpf;
 
+    private String address;
+
+    private String phoneNumber;
+
     @OneToOne
     @JoinColumn(name="userModel_Id")
     private UserModel userModel;
+
+    @OneToOne(mappedBy = "userEmail")
+    private ProductsUser productsUser;
+
+
 }

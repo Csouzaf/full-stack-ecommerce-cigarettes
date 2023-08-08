@@ -44,11 +44,11 @@ public class AuthenticationService {
         userEmail.setEmail(request.getEmail());
         userEmail.setCpf(request.getCpf());
         userEmail.setFullName(request.getFullName());
+        userEmail.setAddress(request.getAddress());
+        userEmail.setPhoneNumber(request.getPhoneNumber());
 
         userEmail.setUserModel(user);
-
-        //    repository.save(user.setEmail(userEmail));
-
+        
         userEmailRepository.save(userEmail);
         
         var jwtToken = jwtService.generatedToken(user);

@@ -30,7 +30,6 @@ Project Ecommerce Cigarettes
   >>"cpf":"",<br>
   >>"password": "",<br>
   >>"address":"",<br>
-  >>"role":"USER" <br>
   
   >After this, do login: **http://localhost:8080/auth/login** and complete the JSON bellow, with user created:<br>
    >>"email": "",<br>

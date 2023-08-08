@@ -2,6 +2,7 @@ package api.ecommerce.br.apiecommerce.model;
 
 import java.util.*;
 import org.hibernate.annotations.ManyToAny;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.util.Optionals;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,6 +26,7 @@ public class UserModel implements UserDetails{
     @Id
     private Long id;
     
+    @NotEmpty(message = "Nome obrigatório")
     private String fullName;
 
     @Column(unique = true)
@@ -32,18 +34,23 @@ public class UserModel implements UserDetails{
     @Email(message = "O email informado é inválido", flags = Flag.CASE_INSENSITIVE)
     @Pattern(regexp=".+@.+\\..+", message = "Insira um email válido com @ e um domínio")
     private String email;
-
+    
+    @NotEmpty(message = "Número obrigatório")
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    // @CPF
+    @NotEmpty(message = "CPF obrigatório")
     @Column(name = "CPF", length = 11, unique = true)
     private String cpf;
 
     // @OneToMany(mappedBy = "userModel", fetch = FetchType.EAGER)
     // private List<ProductsUser> productUsers;
 
+    @NotEmpty(message = "Endereco obrigatório")
     private String address;
-    
+
+    @NotEmpty(message = "Senha obrigatória")
     private String password;
 
     @OneToOne(mappedBy = "userModel")

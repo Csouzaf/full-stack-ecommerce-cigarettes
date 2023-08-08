@@ -20,19 +20,9 @@ import lombok.RequiredArgsConstructor;
 public class AuthenticationController {
    
     private final AuthenticationService service;
-    @Bean
-    public UserEmail myTeste(){
-        UserEmail user = new UserEmail();
-        // user.setEmail();
-        return user;
-    }
-    // private final UserEmail userEmail;
 
     @PostMapping("/signup")
     public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest request) {
-        // UserEmail user = new UserEmail();
-    
-        //     user.setEmail(request.getEmail());
 
         return ResponseEntity.ok(service.register(request));
         
