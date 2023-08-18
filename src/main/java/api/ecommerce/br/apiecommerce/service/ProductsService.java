@@ -1,10 +1,28 @@
 package api.ecommerce.br.apiecommerce.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import api.ecommerce.br.apiecommerce.config.auth.AuthenticationRequest;
+import api.ecommerce.br.apiecommerce.config.auth.AuthenticationService;
+import api.ecommerce.br.apiecommerce.config.jwt.ApplicationConfig;
 import api.ecommerce.br.apiecommerce.exception.ResourceNotFoundException;
 import api.ecommerce.br.apiecommerce.model.Products;
+import api.ecommerce.br.apiecommerce.model.ProductsUser;
+import api.ecommerce.br.apiecommerce.model.UserEmail;
+import api.ecommerce.br.apiecommerce.model.UserModel;
 import api.ecommerce.br.apiecommerce.repository.ProductsRepository;
+import api.ecommerce.br.apiecommerce.repository.ProductsUserRepository;
+import api.ecommerce.br.apiecommerce.repository.UserEmailRepository;
+import api.ecommerce.br.apiecommerce.repository.UserRepository;
+import jakarta.validation.constraints.Email;
 
 @Service
 public class ProductsService {
@@ -12,15 +30,79 @@ public class ProductsService {
     @Autowired
     private ProductsRepository productsRepository;
 
+    @Autowired
+    private ProductsUserRepository productsUserRepository;
+
+    @Autowired
+    private UserEmailRepository userEmail;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private  AuthenticationService service;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     public Iterable<Products> listProducts(){
         return productsRepository.findAll();
     }
 
-
-    public Products createProducts(Products products){
-       
-       return productsRepository.save(products); 
+    public Authentication authenticate(AuthenticationRequest request) {
+        // Crie um objeto de autenticação com base nos dados da requisição
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+            request.getEmail(),
+            request.getPassword()
+        );
+        
+        // Chame o AuthenticationManager para autenticar
+        return authenticationManager.authenticate(authentication);
     }
+        
+   
+    public Products createProducts(Products products, Authentication authentication){
+    
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            
+           UserDetails authenticatedUser = (UserDetails) authentication.getPrincipal();
+
+           UserModel userModel = getUser(authenticatedUser.getUsername());
+           
+           if(userModel != null){
+            
+            products.setUserModelProducts(userModel);
+            
+            return productsRepository.save(products);
+           
+        }
+       
+    
+        }
+
+      
+         return null;
+    }
+    
+     // if(authentication != null && authentication.getPrincipal() instanceof UserDetails){
+        //     UserDetails authenticatedUser = (UserDetails) authentication.getPrincipal();
+            
+        //     UserModel userModel = getUser(authenticatedUser.getUsername());
+            
+        //     if(userModel != null){
+        //         List<Products> productsAss = productsRepository.findAllById(productsId);
+        //     }
+        // }
+
+
+    public UserModel getUser(String email){
+        
+      return userRepository.findByEmail(email).orElse(null);
+    
+    }
+
+
+    // private Products 
 
     public Products updateProducts(Long code, Products products){
 
@@ -29,7 +111,6 @@ public class ProductsService {
              new ResourceNotFoundException("Produto não encontrado com ID: " + code));
 
         productsExist.setQuantityStock(products.getQuantityStock());
-        
         
         return productsRepository.save(productsExist);
     }

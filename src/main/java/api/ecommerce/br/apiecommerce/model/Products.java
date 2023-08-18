@@ -30,20 +30,28 @@ public class Products {
     private Long id;
 
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "nameProducts", nullable = false)
     private String name;
     
 
     @Column(name = "quantity_Stock", nullable = true)
     private int quantityStock;
 
+    
+    @Column(name = "quantityProducts", nullable = true)
+    private int quantity;
+
 
     @Column(name = "unitary_Value", nullable = false)
     private Double unitaryValue;
 
-    @ManyToOne
-    @JoinColumn(name = "productsUserId")
-    private ProductsUser productsUser;
+    @OneToOne
+    @JoinColumn(name = "usermodel_ld")
+    private UserModel userModelProducts;
+
+    // @ManyToOne
+    // @JoinColumn(name = "productsUserId")
+    // private ProductsUser productsUser;
 
 
 }

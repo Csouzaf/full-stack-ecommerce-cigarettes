@@ -33,6 +33,20 @@ Project Ecommerce Cigarettes
   
   >After this, do login: **http://localhost:8080/auth/login** and complete the JSON bellow, with user created:<br>
    >>"email": "",<br>
-   >>"password": "",<br>
+   >>"password": "",<br><br>
+   >>OB: you see the token generated
+
+>>Try add a product with user logged:<br>
+  >In the path: **http://localhost:8080/products/create**, past the bearer token generated without "" and complete the JSON bellow:<br>
+  >>{
+  >>"name": "Dunhill2",<br>
+  >>"quantity": 201,<br>
+  >>"quantityStock": 1,<br>
+  >>"unitaryValue": 11.5,<br>
+  
+}
+
+
+
 
 }

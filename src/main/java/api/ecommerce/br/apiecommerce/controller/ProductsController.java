@@ -1,21 +1,18 @@
 package api.ecommerce.br.apiecommerce.controller;
 
+import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.*;
 
+import api.ecommerce.br.apiecommerce.config.auth.AuthenticationRequest;
 import api.ecommerce.br.apiecommerce.model.Products;
 import api.ecommerce.br.apiecommerce.service.ProductsService;
 
 @RestController
+@RequestMapping("/products")
 public class ProductsController {
     
     @Autowired
@@ -27,9 +24,18 @@ public class ProductsController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Products> createProducts(@RequestBody Products products){
+    public ResponseEntity<Products> createProducts(@RequestBody Products products, Authentication authentication){
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(productsService.createProducts(products));
+        Products createProducts = productsService.createProducts(products, authentication);
+        
+        if(createProducts != null){
+            return ResponseEntity.status(HttpStatus.CREATED).body(createProducts);
+        } 
+        else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        
+    
     }
 
     @PutMapping("/update/{code}")

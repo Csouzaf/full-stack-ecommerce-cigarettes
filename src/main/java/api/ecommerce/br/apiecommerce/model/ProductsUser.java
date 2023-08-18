@@ -36,12 +36,8 @@ public class ProductsUser {
     @Column(name = "payment_method")
     private String paymentMethod;
 
-    @OneToOne
-    @JoinColumn(name = "userEmail_ld")
-    private UserEmail userEmail;
-
-    @OneToMany(mappedBy = "productsUser")
-    private List<Products> products;
+    // @OneToMany(mappedBy = "productsUser")
+    // private List<Products> products;
 
 
 

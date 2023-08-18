@@ -10,6 +10,6 @@ import api.ecommerce.br.apiecommerce.model.UserEmail;
 @Repository
 public interface UserEmailRepository extends JpaRepository<UserEmail, String>{
 
-    Optional<UserEmail> findByEmail(String email);
+    UserEmail findByEmail(String email);
    
 }

@@ -29,8 +29,8 @@ public class UserEmail {
     @JoinColumn(name="userModel_Id")
     private UserModel userModel;
 
-    @OneToOne(mappedBy = "userEmail")
-    private ProductsUser productsUser;
+    // @OneToOne(mappedBy = "userEmail")
+    // private ProductsUser productsUser;
 
 
 }
