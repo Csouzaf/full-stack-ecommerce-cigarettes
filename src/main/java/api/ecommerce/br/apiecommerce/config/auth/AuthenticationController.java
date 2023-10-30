@@ -21,6 +21,7 @@ public class AuthenticationController {
    
     private final AuthenticationService service;
 
+
     @PostMapping("/signup")
     public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest request) {
 
@@ -28,11 +29,12 @@ public class AuthenticationController {
         
     }
 
-    @PostMapping("/login")
+     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticationRequest request) {
 
         return ResponseEntity.ok(service.authenticate(request));
     }
+
 
     @GetMapping("/home")
     public ResponseEntity<String> homePage(){

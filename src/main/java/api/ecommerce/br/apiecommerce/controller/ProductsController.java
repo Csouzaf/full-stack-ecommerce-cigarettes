@@ -18,10 +18,11 @@ public class ProductsController {
     @Autowired
     private ProductsService productsService;
 
-    @GetMapping("/list")
+    @GetMapping()
     public Iterable<Products> listproducts(){
         return productsService.listProducts();
     }
+
 
     @PostMapping("/create")
     public ResponseEntity<Products> createProducts(@RequestBody Products products, Authentication authentication){

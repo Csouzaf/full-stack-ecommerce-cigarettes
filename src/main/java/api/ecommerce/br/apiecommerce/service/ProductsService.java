@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -23,34 +24,31 @@ import api.ecommerce.br.apiecommerce.repository.ProductsUserRepository;
 import api.ecommerce.br.apiecommerce.repository.UserEmailRepository;
 import api.ecommerce.br.apiecommerce.repository.UserRepository;
 import jakarta.validation.constraints.Email;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class ProductsService {
     
-    @Autowired
     private ProductsRepository productsRepository;
 
-    @Autowired
     private ProductsUserRepository productsUserRepository;
 
-    @Autowired
     private UserEmailRepository userEmail;
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private  AuthenticationService service;
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
     public Iterable<Products> listProducts(){
-        return productsRepository.findAll();
+        return this.productsRepository.findAll();
     }
 
     public Authentication authenticate(AuthenticationRequest request) {
-        // Crie um objeto de autenticação com base nos dados da requisição
+        // Criar um objeto de autenticação com base nos dados da requisição
         Authentication authentication = new UsernamePasswordAuthenticationToken(
             request.getEmail(),
             request.getPassword()
@@ -59,40 +57,20 @@ public class ProductsService {
         // Chame o AuthenticationManager para autenticar
         return authenticationManager.authenticate(authentication);
     }
-        
+    
    
     public Products createProducts(Products products, Authentication authentication){
     
-        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
-            
-           UserDetails authenticatedUser = (UserDetails) authentication.getPrincipal();
-
-           UserModel userModel = getUser(authenticatedUser.getUsername());
-           
-           if(userModel != null){
-            
-            products.setUserModelProducts(userModel);
-            
-            return productsRepository.save(products);
-           
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth != null && authentication.isAuthenticated()) {
+           Products products2 = productsRepository.save(products);
+           return products2;
         }
-       
+        return null;
     
-        }
-
-      
-         return null;
     }
     
-     // if(authentication != null && authentication.getPrincipal() instanceof UserDetails){
-        //     UserDetails authenticatedUser = (UserDetails) authentication.getPrincipal();
-            
-        //     UserModel userModel = getUser(authenticatedUser.getUsername());
-            
-        //     if(userModel != null){
-        //         List<Products> productsAss = productsRepository.findAllById(productsId);
-        //     }
-        // }
+
 
 
     public UserModel getUser(String email){

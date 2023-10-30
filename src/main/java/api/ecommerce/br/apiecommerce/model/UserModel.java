@@ -27,6 +27,9 @@ public class UserModel implements UserDetails{
     private Long id;
     
     @NotEmpty(message = "Nome obrigatório")
+    private String firstName;
+
+    @NotEmpty(message = "Nome obrigatório")
     private String fullName;
 
     @Column(unique = true)
