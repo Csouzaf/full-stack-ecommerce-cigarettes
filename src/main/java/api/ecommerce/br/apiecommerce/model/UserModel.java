@@ -32,6 +32,7 @@ public class UserModel implements UserDetails{
     @NotEmpty(message = "Nome obrigatório")
     private String fullName;
 
+    @NotNull
     @Column(unique = true)
     @NotEmpty(message = "Email obrigatório")
     @Email(message = "O email informado é inválido", flags = Flag.CASE_INSENSITIVE)
@@ -62,8 +63,6 @@ public class UserModel implements UserDetails{
     @OneToOne(mappedBy = "userModelProducts")
     private Products productsUser;
 
-
-
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -79,12 +78,13 @@ public class UserModel implements UserDetails{
 
     @Override
     public String getUsername() {
-        
+      
         return email;
     }
 
     @Override
     public String getPassword(){
+
         return password;
     }
 

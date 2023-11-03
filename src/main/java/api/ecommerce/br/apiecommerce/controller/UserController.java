@@ -21,26 +21,22 @@ import api.ecommerce.br.apiecommerce.service.UserService;
 public class UserController {
 
   private UserService userService;
-
-  @GetMapping("/home")  
-  public ResponseEntity<String> homeUser() {
-    return ResponseEntity.ok("Hello user");
-  }
   
-  //Return username user logged
   @GetMapping("/username")
   @ResponseBody
-  public ResponseEntity<?> getUserLogged(){
+  public ResponseEntity<?> getFullNameUserLogged(){
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-      if (authentication != null && authentication.isAuthenticated()) {
-       
-       String username = authentication.getName();
-        return ResponseEntity.ok().body(username);
-      }
-      return null;
-    }
 
-  
+    if (authentication != null && authentication.isAuthenticated()) {
+        if (authentication.getPrincipal() instanceof UserModel) {
+            UserModel userModel = (UserModel) authentication.getPrincipal();
+            String fullName = userModel.getFullName();
+            return ResponseEntity.ok().body("Bem vindo " + fullName);
+        }
+    }
+    return ResponseEntity.notFound().build();
+  }
+
   @PostMapping()
   public ResponseEntity<String> productsUser(){
     return ResponseEntity.ok("produtos");
