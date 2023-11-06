@@ -30,14 +30,6 @@ public class ApplicationConfig {
       
     }
 
-    
-    // @Bean
-    // public UserDetailsService userDetailsGetName() {
-    //    return email -> repository.findByEmail(email)
-    //         .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
-      
-    // }
-
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();

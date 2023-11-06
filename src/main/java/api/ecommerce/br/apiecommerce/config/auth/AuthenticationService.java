@@ -31,7 +31,6 @@ public class AuthenticationService {
             .email(request.getEmail())
             .password(passwordEncoder.encode(request.getPassword()))
             .cpf(request.getCpf())
-            .firstName(request.getFirstName())
             .fullName(request.getFullName())
             .phoneNumber(request.getPhoneNumber())
             .address(request.getAddress())

@@ -3,8 +3,10 @@ package api.ecommerce.br.apiecommerce.model;
 import org.hibernate.annotations.ManyToAny;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 
+import api.ecommerce.br.apiecommerce.enums.Cigarrets;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,45 +15,50 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "products")
-
+@Getter
+@Setter
+@ToString
 public class Products {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @Column(name = "nameProducts", nullable = false)
+    @NotNull
+    @Column(name = "nameProducts")
     private String name;
     
-
-    @Column(name = "quantity_Stock", nullable = true)
+    @NotNull
+    @Column(name = "quantity_Stock")
     private int quantityStock;
 
-    
-    @Column(name = "quantityProducts", nullable = true)
-    private int quantity;
+    @NotNull
+    @Column(name = "quantityProducts")
+    private int quantityProducts;
 
+    @NotNull
+    @Column(name = "cigarrets")
+    @Enumerated
+    private Cigarrets cigarrets;
 
-    @Column(name = "unitary_Value", nullable = false)
+    @NotNull
+    @Column(name = "unitary_Value")
     private Double unitaryValue;
 
-    @OneToOne
-    @JoinColumn(name = "usermodel_ld")
-    private UserModel userModelProducts;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="shopping_cart_id", nullable=false)
+    private ShoppingCartModel shoppingCartModel;
 
-    // @ManyToOne
-    // @JoinColumn(name = "productsUserId")
-    // private ProductsUser productsUser;
-
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    private UserModel userModel;
 }

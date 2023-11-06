@@ -10,10 +10,7 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserModel, Long>{
-    
-    // UserModel findByEmail(String email);
-
+  
     Optional<UserModel> findByEmail(String email);
-    // Optional <UserModel> findByFullName(String fullName);
-   
+
 }

@@ -15,9 +15,9 @@ import lombok.*;
 
 @Entity
 @Table(name = "users_ecommerce")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 @Builder
 
 public class UserModel implements UserDetails{
@@ -26,9 +26,6 @@ public class UserModel implements UserDetails{
     @Id
     private Long id;
     
-    @NotEmpty(message = "Nome obrigatório")
-    private String firstName;
-
     @NotEmpty(message = "Nome obrigatório")
     private String fullName;
 
@@ -48,9 +45,6 @@ public class UserModel implements UserDetails{
     @Column(name = "CPF", length = 11, unique = true)
     private String cpf;
 
-    // @OneToMany(mappedBy = "userModel", fetch = FetchType.EAGER)
-    // private List<ProductsUser> productUsers;
-
     @NotEmpty(message = "Endereco obrigatório")
     private String address;
 
@@ -59,9 +53,6 @@ public class UserModel implements UserDetails{
 
     @OneToOne(mappedBy = "userModel")
     private UserEmail userEmail;
-
-    @OneToOne(mappedBy = "userModelProducts")
-    private Products productsUser;
 
     @Enumerated(EnumType.STRING)
     private Role role;
