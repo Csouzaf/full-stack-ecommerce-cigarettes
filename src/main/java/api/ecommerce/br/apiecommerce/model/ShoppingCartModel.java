@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,8 +44,12 @@ public class ShoppingCartModel {
     @Column(name = "payment_method")
     private String paymentMethod;
 
-    @OneToMany(mappedBy = "shoppingCartModel")
-    private List<Products> products;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="products_id", nullable = false)
+    private Products products;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserModel userModel;
 }    
  
