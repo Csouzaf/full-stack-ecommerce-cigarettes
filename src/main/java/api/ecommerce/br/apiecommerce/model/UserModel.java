@@ -56,11 +56,6 @@ public class UserModel implements UserDetails{
     @OneToOne(mappedBy = "userModel")
     private UserEmail userEmail;
 
-    @OneToOne(mappedBy = "userModelProducts")
-    private Products productsUser;
-
-
-
     @Enumerated(EnumType.STRING)
     private Role role;
 

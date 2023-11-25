@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import api.ecommerce.br.apiecommerce.model.UserModel;
 
 @Repository
-public interface UserUpdateDeleteRepository extends JpaRepository<UserModel, String > {
+public interface UserUpdateDeleteRepository extends JpaRepository<UserModel, Long > {
      
     UserModel findByEmail(String email);
 }

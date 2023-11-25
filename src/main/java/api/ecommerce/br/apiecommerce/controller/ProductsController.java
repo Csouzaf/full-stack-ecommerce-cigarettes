@@ -11,14 +11,14 @@ import api.ecommerce.br.apiecommerce.config.auth.AuthenticationRequest;
 import api.ecommerce.br.apiecommerce.model.Products;
 import api.ecommerce.br.apiecommerce.service.ProductsService;
 
+
 @RestController
 @RequestMapping("/products")
 public class ProductsController {
-    
     @Autowired
-    private ProductsService productsService;
+     private ProductsService productsService;
 
-    @GetMapping("/list")
+    @GetMapping()
     public Iterable<Products> listproducts(){
         return productsService.listProducts();
     }

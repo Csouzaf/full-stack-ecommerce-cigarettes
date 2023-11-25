@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,31 +17,39 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "productusers")
+@Table(name = "shoppingCart")
+@Getter
+@Setter
+@ToString
 
-public class ProductsUser {
+public class ShoppingCartModel {
     
     @Id
     private Long id;
 
-    @Column(name = "amount_paid", nullable = false)
+    @NotNull
+    @Column(name = "amount_paid")
     private Double amountPaid;
 
+    @NotNull
     @Column(name = "payment_method")
     private String paymentMethod;
 
-    // @OneToMany(mappedBy = "productsUser")
-    // private List<Products> products;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="products_id", nullable = false)
+    private Products products;
 
-
-
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserModel userModel;
 }    
  
