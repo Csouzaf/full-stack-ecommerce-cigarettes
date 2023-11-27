@@ -47,10 +47,10 @@ public class Products {
     @Column(name = "quantityProducts")
     private int quantityProducts;
 
-    // @NotNull
-    // @Column(name = "cigarrets")
-    // @Enumerated
-    // private Cigarrets cigarrets;
+    @NotNull
+    @Column(name = "cigarrets")
+    @Enumerated
+    private Cigarrets cigarrets;
 
     @NotNull
     @Column(name = "unitary_Value")

@@ -8,76 +8,50 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 import api.ecommerce.br.apiecommerce.config.auth.AuthenticationRequest;
-import api.ecommerce.br.apiecommerce.config.auth.AuthenticationService;
-import api.ecommerce.br.apiecommerce.config.jwt.ApplicationConfig;
-import api.ecommerce.br.apiecommerce.exception.ProductsException;
 import api.ecommerce.br.apiecommerce.exception.ResourceNotFoundException;
 import api.ecommerce.br.apiecommerce.model.Products;
-
-import api.ecommerce.br.apiecommerce.model.UserEmail;
-import api.ecommerce.br.apiecommerce.model.UserModel;
 import api.ecommerce.br.apiecommerce.repository.ProductsRepository;
 
-import api.ecommerce.br.apiecommerce.repository.UserEmailRepository;
-import api.ecommerce.br.apiecommerce.repository.UserRepository;
-import jakarta.validation.constraints.Email;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class ProductsService {
     
-    @Autowired
     private ProductsRepository productsRepository;
-
-    @Autowired
-    private UserEmailRepository userEmail;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private  AuthenticationService service;
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
     public Iterable<Products> listProducts(){
-        return productsRepository.findAll();
+        return this.productsRepository.findAll();
     }
 
+    public Authentication authenticate(AuthenticationRequest request) {
+       
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+            request.getEmail(),
+            request.getPassword()
+        );
+        
+        // Chame o AuthenticationManager para autenticar
+        return authenticationManager.authenticate(authentication);
+    }
+    
    
     public Products createProducts(Products products, Authentication authentication){
+    
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth == null && !authentication.isAuthenticated()) {
-            throw new ProductsException("Usuário não autenticado");
-           
+        if(auth != null && authentication.isAuthenticated()) {
+           Products products2 = productsRepository.save(products);
+           return products2;
         }
-       Products productsSaved = productsRepository.save(products);
-        return productsSaved;
-    }
-    
-     // if(authentication != null && authentication.getPrincipal() instanceof UserDetails){
-        //     UserDetails authenticatedUser = (UserDetails) authentication.getPrincipal();
-            
-        //     UserModel userModel = getUser(authenticatedUser.getUsername());
-            
-        //     if(userModel != null){
-        //         List<Products> productsAss = productsRepository.findAllById(productsId);
-        //     }
-        // }
-
-
-    public UserModel getUser(String email){
-        
-      return userRepository.findByEmail(email).orElse(null);
+        return null;
     
     }
-
-
-    // private Products 
+    
 
     public Products updateProducts(Long code, Products products){
 

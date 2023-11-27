@@ -29,6 +29,7 @@ public class UserModel implements UserDetails{
     @NotEmpty(message = "Nome obrigatório")
     private String fullName;
 
+    @NotNull
     @Column(unique = true)
     @NotEmpty(message = "Email obrigatório")
     @Email(message = "O email informado é inválido", flags = Flag.CASE_INSENSITIVE)
@@ -43,9 +44,6 @@ public class UserModel implements UserDetails{
     @NotEmpty(message = "CPF obrigatório")
     @Column(name = "CPF", length = 11, unique = true)
     private String cpf;
-
-    // @OneToMany(mappedBy = "userModel", fetch = FetchType.EAGER)
-    // private List<ProductsUser> productUsers;
 
     @NotEmpty(message = "Endereco obrigatório")
     private String address;
@@ -71,12 +69,13 @@ public class UserModel implements UserDetails{
 
     @Override
     public String getUsername() {
-        
+      
         return email;
     }
 
     @Override
     public String getPassword(){
+
         return password;
     }
 

@@ -11,19 +11,19 @@ import api.ecommerce.br.apiecommerce.config.auth.AuthenticationRequest;
 import api.ecommerce.br.apiecommerce.model.Products;
 import api.ecommerce.br.apiecommerce.service.ProductsService;
 
-
 @RestController
 @RequestMapping("/products")
 public class ProductsController {
+    
     @Autowired
-     private ProductsService productsService;
+    private ProductsService productsService;
 
     @GetMapping()
     public Iterable<Products> listproducts(){
         return productsService.listProducts();
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     public ResponseEntity<Products> createProducts(@RequestBody Products products, Authentication authentication){
 
         Products createProducts = productsService.createProducts(products, authentication);
@@ -34,8 +34,7 @@ public class ProductsController {
         else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
-        
-    
+           
     }
 
     @PutMapping("/update/{code}")

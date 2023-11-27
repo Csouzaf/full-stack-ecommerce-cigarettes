@@ -21,11 +21,19 @@ import lombok.RequiredArgsConstructor;
 public class AuthenticationController {
    
     private final AuthenticationService service;
-@PostMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticationRequest request) {
 
-        return ResponseEntity.ok(service.authenticate(request));
+        try {
+             return ResponseEntity.ok(service.authenticate(request));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+        
+       
     }
+
     @PostMapping("/signup")
     public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest request) {
 
