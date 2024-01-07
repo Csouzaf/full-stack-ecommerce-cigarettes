@@ -49,25 +49,18 @@ public class ProductsService {
     }
 
    
-    public Products createProducts(Products products, Authentication authentication){
+    public Products createProducts(Products products){
+    
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth == null && !authentication.isAuthenticated()) {
+        if(auth == null || !auth.isAuthenticated()) {
             throw new ProductsException("Usuário não autenticado");
            
         }
-       Products productsSaved = productsRepository.save(products);
-        return productsSaved;
+        UserModel loggedUser = (UserModel) auth.getPrincipal();
+        
+        products.setUserModel(loggedUser);
+        return productsRepository.save(products);
     }
-    
-     // if(authentication != null && authentication.getPrincipal() instanceof UserDetails){
-        //     UserDetails authenticatedUser = (UserDetails) authentication.getPrincipal();
-            
-        //     UserModel userModel = getUser(authenticatedUser.getUsername());
-            
-        //     if(userModel != null){
-        //         List<Products> productsAss = productsRepository.findAllById(productsId);
-        //     }
-        // }
 
 
     public UserModel getUser(String email){

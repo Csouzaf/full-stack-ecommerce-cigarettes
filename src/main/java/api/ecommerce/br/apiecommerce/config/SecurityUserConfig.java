@@ -29,6 +29,7 @@ public class SecurityUserConfig {
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/products").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
