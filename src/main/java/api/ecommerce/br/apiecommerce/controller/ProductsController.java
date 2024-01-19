@@ -12,7 +12,7 @@ import api.ecommerce.br.apiecommerce.model.Products;
 import api.ecommerce.br.apiecommerce.service.ProductsService;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("products")
 public class ProductsController {
     
     @Autowired
@@ -24,17 +24,14 @@ public class ProductsController {
     }
 
     @PostMapping()
-    public ResponseEntity<Products> createProducts(@RequestBody Products products, Authentication authentication){
 
-        Products createProducts = productsService.createProducts(products, authentication);
+    public ResponseEntity<Products> createProducts(@RequestBody Products products){
+
+
+        Products createProducts = productsService.createProducts(products);
         
-        if(createProducts != null){
-            return ResponseEntity.status(HttpStatus.CREATED).body(createProducts);
-        } 
-        else{
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-           
+        return ResponseEntity.status(HttpStatus.CREATED).body(createProducts);
+
     }
 
     @PutMapping("/update/{code}")

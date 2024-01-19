@@ -44,22 +44,24 @@ public class Products {
     private int quantityStock;
 
     @NotNull
-    @Column(name = "quantityProducts")
+    @Column(name = "quantity_products")
     private int quantityProducts;
-
-    @NotNull
-    @Column(name = "cigarrets")
-    @Enumerated
-    private Cigarrets cigarrets;
 
     @NotNull
     @Column(name = "unitary_Value")
     private Double unitaryValue;
 
     @OneToMany(mappedBy = "products", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<ShoppingCartModel> shoppingCart;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "user_id", nullable = false)
     private UserModel userModel;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Brand brand;
+    
+
 }

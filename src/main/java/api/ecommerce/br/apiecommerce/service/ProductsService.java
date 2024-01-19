@@ -22,8 +22,10 @@ public class ProductsService {
     
     private ProductsRepository productsRepository;
 
+    
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private UserRepository userRepository;
+
 
     public Iterable<Products> listProducts(){
         return this.productsRepository.findAll();
@@ -41,17 +43,27 @@ public class ProductsService {
     }
     
    
-    public Products createProducts(Products products, Authentication authentication){
+
+    public Products createProducts(Products products){
     
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth != null && authentication.isAuthenticated()) {
-           Products products2 = productsRepository.save(products);
-           return products2;
+        if(auth == null || !auth.isAuthenticated()) {
+            throw new ProductsException("Usuário não autenticado");
+           
         }
-        return null;
+        UserModel loggedUser = (UserModel) auth.getPrincipal();
+        
+        products.setUserModel(loggedUser);
+        return productsRepository.save(products);
+    }
+
+
+    public UserModel getUser(String email){
+        
+      return userRepository.findByEmail(email).orElse(null);
     
     }
-    
+
 
     public Products updateProducts(Long code, Products products){
 
