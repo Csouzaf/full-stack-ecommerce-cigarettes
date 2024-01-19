@@ -47,11 +47,6 @@ public class Products {
     @Column(name = "quantityProducts")
     private int quantityProducts;
 
-    // @NotNull
-    // @Column(name = "cigarrets")
-    // @Enumerated
-    // private Cigarrets cigarrets;
-
     @NotNull
     @Column(name = "unitary_Value")
     private Double unitaryValue;
@@ -62,4 +57,9 @@ public class Products {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserModel userModel;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Brand brand;
+    
+
 }

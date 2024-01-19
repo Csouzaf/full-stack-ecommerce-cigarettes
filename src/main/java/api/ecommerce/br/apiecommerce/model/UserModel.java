@@ -44,9 +44,6 @@ public class UserModel implements UserDetails{
     @Column(name = "CPF", length = 11, unique = true)
     private String cpf;
 
-    // @OneToMany(mappedBy = "userModel", fetch = FetchType.EAGER)
-    // private List<ProductsUser> productUsers;
-
     @NotEmpty(message = "Endereco obrigatório")
     private String address;
 

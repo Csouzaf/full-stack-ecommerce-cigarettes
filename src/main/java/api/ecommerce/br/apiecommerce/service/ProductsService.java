@@ -31,18 +31,10 @@ public class ProductsService {
     
     @Autowired
     private ProductsRepository productsRepository;
-
-    @Autowired
-    private UserEmailRepository userEmail;
-
+    
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private  AuthenticationService service;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     public Iterable<Products> listProducts(){
         return productsRepository.findAll();
@@ -58,16 +50,6 @@ public class ProductsService {
        Products productsSaved = productsRepository.save(products);
         return productsSaved;
     }
-    
-     // if(authentication != null && authentication.getPrincipal() instanceof UserDetails){
-        //     UserDetails authenticatedUser = (UserDetails) authentication.getPrincipal();
-            
-        //     UserModel userModel = getUser(authenticatedUser.getUsername());
-            
-        //     if(userModel != null){
-        //         List<Products> productsAss = productsRepository.findAllById(productsId);
-        //     }
-        // }
 
 
     public UserModel getUser(String email){
@@ -75,9 +57,6 @@ public class ProductsService {
       return userRepository.findByEmail(email).orElse(null);
     
     }
-
-
-    // private Products 
 
     public Products updateProducts(Long code, Products products){
 
