@@ -39,7 +39,6 @@ public class Products {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @Column(name = "quantity_Stock")
     private int quantityStock;
 
@@ -51,16 +50,16 @@ public class Products {
     @Column(name = "unitary_Value")
     private Double unitaryValue;
 
-    @OneToMany(mappedBy = "products", fetch = FetchType.EAGER)
     @JsonIgnore
+    @OneToMany(mappedBy = "products")
     private List<ShoppingCartModel> shoppingCart;
 
-    @ManyToOne
     @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserModel userModel;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     private Brand brand;
     
 

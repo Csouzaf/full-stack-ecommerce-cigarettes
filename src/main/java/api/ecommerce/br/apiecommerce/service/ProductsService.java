@@ -1,9 +1,13 @@
 package api.ecommerce.br.apiecommerce.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import api.ecommerce.br.apiecommerce.controller.response.ProductsResponse;
 import api.ecommerce.br.apiecommerce.exception.ProductsException;
 import api.ecommerce.br.apiecommerce.exception.ResourceNotFoundException;
 import api.ecommerce.br.apiecommerce.model.Products;
@@ -18,12 +22,10 @@ public class ProductsService {
     
     private ProductsRepository productsRepository;
 
-    
     @Autowired
     private UserRepository userRepository;
 
-
-    public Iterable<Products> listProducts(){
+    public List<Products> listProducts(){
         return this.productsRepository.findAll();
     }
   

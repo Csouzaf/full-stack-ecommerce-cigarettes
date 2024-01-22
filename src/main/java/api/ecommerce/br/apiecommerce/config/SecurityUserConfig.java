@@ -29,7 +29,7 @@ public class SecurityUserConfig {
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/**").permitAll()
-                .requestMatchers("/products").permitAll()
+                .requestMatchers("/products/**").permitAll()
                 .requestMatchers("/brand").permitAll()
                 .anyRequest().authenticated()
                 .and()

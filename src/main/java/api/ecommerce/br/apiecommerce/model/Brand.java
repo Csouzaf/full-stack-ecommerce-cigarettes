@@ -37,6 +37,7 @@ public class Brand {
     @Column(name="category")
     private String category;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "brand", fetch = FetchType.EAGER)
     private List<Model> models;
 

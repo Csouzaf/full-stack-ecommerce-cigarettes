@@ -1,5 +1,8 @@
 package api.ecommerce.br.apiecommerce.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -8,19 +11,27 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import api.ecommerce.br.apiecommerce.config.auth.AuthenticationRequest;
+import api.ecommerce.br.apiecommerce.controller.response.ProductsResponse;
 import api.ecommerce.br.apiecommerce.model.Products;
 import api.ecommerce.br.apiecommerce.service.ProductsService;
 
 @RestController
-@RequestMapping("products")
+@RequestMapping("/products")
 public class ProductsController {
     
     @Autowired
     private ProductsService productsService;
 
     @GetMapping()
-    public Iterable<Products> listproducts(){
-        return productsService.listProducts();
+    public ResponseEntity<List<ProductsResponse>> listproducts(){
+
+        List<ProductsResponse> productsResponses = new ArrayList<>();
+
+        productsService.listProducts().forEach(products -> {
+            productsResponses.add(new ProductsResponse(products));
+            });
+            
+        return ResponseEntity.ok().body(productsResponses);
     }
 
     @PostMapping()
