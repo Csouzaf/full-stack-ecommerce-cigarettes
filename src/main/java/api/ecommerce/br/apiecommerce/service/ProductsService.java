@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import api.ecommerce.br.apiecommerce.controller.response.ProductsResponse;
 import api.ecommerce.br.apiecommerce.exception.ProductsException;
 import api.ecommerce.br.apiecommerce.exception.ResourceNotFoundException;
+import api.ecommerce.br.apiecommerce.model.Brand;
 import api.ecommerce.br.apiecommerce.model.Products;
 import api.ecommerce.br.apiecommerce.model.UserModel;
+import api.ecommerce.br.apiecommerce.repository.BrandRepository;
 import api.ecommerce.br.apiecommerce.repository.ProductsRepository;
 import api.ecommerce.br.apiecommerce.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -24,6 +26,9 @@ public class ProductsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BrandRepository brandRepository;
 
     public List<Products> listProducts(){
         return this.productsRepository.findAll();
@@ -40,6 +45,7 @@ public class ProductsService {
         UserModel loggedUser = (UserModel) auth.getPrincipal();
         
         products.setUserModel(loggedUser);
+
         return productsRepository.save(products);
     }
 

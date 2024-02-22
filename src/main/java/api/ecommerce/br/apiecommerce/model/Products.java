@@ -62,5 +62,7 @@ public class Products {
     @ManyToOne()
     private Brand brand;
     
+    @ManyToOne()
+    private Model model;
 
 }

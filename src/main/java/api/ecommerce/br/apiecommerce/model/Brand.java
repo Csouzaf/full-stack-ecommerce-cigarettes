@@ -24,7 +24,8 @@ import lombok.ToString;
 @Table(name = "brand")
 @Getter
 @Setter
-@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Brand {
 
     @Id
