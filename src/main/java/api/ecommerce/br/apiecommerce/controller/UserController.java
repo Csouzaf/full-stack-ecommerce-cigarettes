@@ -39,7 +39,7 @@ public class UserController {
   
   @GetMapping("/home")  
   public ResponseEntity<String> homeUser() {
-    return ResponseEntity.ok("Hello user");
+    return ResponseEntity.ok().body("Hello user");
   }
 
   @PutMapping()

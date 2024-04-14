@@ -37,14 +37,14 @@ public class ProductsService {
 
     public Products createProducts(Products products){
     
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth == null || !auth.isAuthenticated()) {
-            throw new ProductsException("Usuário não autenticado");
+        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        // if(auth == null || !auth.isAuthenticated()) {
+        //     throw new ProductsException("Usuário não autenticado");
            
-        }
-        UserModel loggedUser = (UserModel) auth.getPrincipal();
+        // }
+        // UserModel loggedUser = (UserModel) auth.getPrincipal();
         
-        products.setUserModel(loggedUser);
+        // products.setUserModel(loggedUser);
 
         return productsRepository.save(products);
     }
