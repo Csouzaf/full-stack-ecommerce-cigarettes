@@ -54,8 +54,7 @@ public class Products {
     @OneToMany(mappedBy = "products")
     private List<ShoppingCartModel> shoppingCart;
 
-    @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private UserModel userModel;
 

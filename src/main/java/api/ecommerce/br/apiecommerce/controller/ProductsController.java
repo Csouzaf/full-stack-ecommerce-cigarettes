@@ -2,15 +2,9 @@ package api.ecommerce.br.apiecommerce.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
-
-import api.ecommerce.br.apiecommerce.config.auth.AuthenticationRequest;
 import api.ecommerce.br.apiecommerce.controller.response.ProductsResponse;
 import api.ecommerce.br.apiecommerce.model.Products;
 import api.ecommerce.br.apiecommerce.service.ProductsService;
@@ -44,16 +38,16 @@ public class ProductsController {
 
     }
 
-    @PutMapping("/update/{code}")
-    public ResponseEntity<Products> updateProducts(@PathVariable Long code, @PathVariable Products products){
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Products> updateProducts(@PathVariable Long id, @PathVariable Products products){
 
-        return ResponseEntity.ok(productsService.updateProducts(code, products));
+        return ResponseEntity.ok(productsService.updateProducts(id, products));
     }
 
-    @DeleteMapping("/delete/{code}")
-    public ResponseEntity<Products> deleteProducts(@PathVariable Long code){
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Products> deleteProducts(@PathVariable Long id){
         
-        productsService.removeProducts(code);
+        productsService.removeProducts(id);
         return ResponseEntity.noContent().build();
     }
 }

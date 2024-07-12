@@ -3,81 +3,83 @@ package api.ecommerce.br.apiecommerce.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import api.ecommerce.br.apiecommerce.controller.response.ProductsResponse;
-import api.ecommerce.br.apiecommerce.exception.ProductsException;
+import api.ecommerce.br.apiecommerce.config.auth.AuthenticationRequest;
 import api.ecommerce.br.apiecommerce.exception.ResourceNotFoundException;
-import api.ecommerce.br.apiecommerce.model.Brand;
 import api.ecommerce.br.apiecommerce.model.Products;
-import api.ecommerce.br.apiecommerce.model.UserModel;
-import api.ecommerce.br.apiecommerce.repository.BrandRepository;
 import api.ecommerce.br.apiecommerce.repository.ProductsRepository;
-import api.ecommerce.br.apiecommerce.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class ProductsService {
-    
+
+    @Autowired
     private ProductsRepository productsRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private BrandRepository brandRepository;
-
-    public List<Products> listProducts(){
+    public List<Products> listProducts() {
         return this.productsRepository.findAll();
     }
-  
 
-    public Products createProducts(Products products){
-    
-        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        // if(auth == null || !auth.isAuthenticated()) {
-        //     throw new ProductsException("Usuário não autenticado");
-           
-        // }
-        // UserModel loggedUser = (UserModel) auth.getPrincipal();
-        
-        // products.setUserModel(loggedUser);
+    public boolean verifyUserIsAuthenticated() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        return productsRepository.save(products);
+        if (auth == null || !auth.isAuthenticated()) {
+            return false;
+        }
+        return true;
     }
 
+    public boolean verifyIsAdminRole() {
 
-    public UserModel getUser(String email){
-        
-      return userRepository.findByEmail(email).orElse(null);
-    
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean hasAdminRole = auth.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("ADMIN"));
+
+        if (!hasAdminRole) {
+            return false;
+        }
+        return true;
     }
 
+    public Products createProducts(Products products) {
 
-    public Products updateProducts(Long code, Products products){
+        if (verifyUserIsAuthenticated() && verifyIsAdminRole()) {
+            Products productsSave = productsRepository.save(products);
+            return productsSave;
+        }
+        return null;
 
-        Products productsExist = productsRepository.findById(code)
-            .orElseThrow(() ->
-             new ResourceNotFoundException("Produto não encontrado com ID: " + code));
-
-        productsExist.setQuantityStock(products.getQuantityStock());
-        
-        return productsRepository.save(productsExist);
     }
-    
-    public void removeProducts(Long code){
 
-        Products productsExist = productsRepository.findById(code)
-            .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com ID: " + code));
+    public Products updateProducts(Long id, Products products) {
 
-        productsRepository.delete(productsExist);
+        if (verifyUserIsAuthenticated() && verifyIsAdminRole()) {
+            Products productsExist = productsRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com ID: " + id));
+
+            productsExist.setQuantityStock(products.getQuantityStock());
+
+            return productsRepository.save(productsExist);
+        }
+        return null;
     }
- 
 
+    public void removeProducts(Long id) {
 
+        if (verifyUserIsAuthenticated() && verifyIsAdminRole()) {
+            Products productsExist = productsRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com ID: " + id));
 
+            productsRepository.delete(productsExist);
+        }
+
+    }
 
 }

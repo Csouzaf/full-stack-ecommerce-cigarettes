@@ -54,6 +54,9 @@ public class UserModel implements UserDetails{
     @OneToOne(mappedBy = "userModel")
     private UserEmail userEmail;
 
+    // @OneToMany(mappedBy = "userModel", fetch = FetchType.LAZY)
+    // private List<Products> products;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
