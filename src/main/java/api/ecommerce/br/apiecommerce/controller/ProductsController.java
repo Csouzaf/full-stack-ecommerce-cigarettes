@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import api.ecommerce.br.apiecommerce.controller.response.ProductsResponse;
-import api.ecommerce.br.apiecommerce.model.Products;
+import api.ecommerce.br.apiecommerce.model.Product;
 import api.ecommerce.br.apiecommerce.service.ProductsService;
 
 @RestController
@@ -29,23 +29,23 @@ public class ProductsController {
     }
 
     @PostMapping()
-    public ResponseEntity<Products> createProducts(@RequestBody Products products){
+    public ResponseEntity<Product> createProducts(@RequestBody Product products){
 
 
-        Products createProducts = productsService.createProducts(products);
+        Product createProducts = productsService.createProducts(products);
         
         return ResponseEntity.status(HttpStatus.CREATED).body(createProducts);
 
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Products> updateProducts(@PathVariable Long id, @PathVariable Products products){
+    public ResponseEntity<Product> updateProducts(@PathVariable Long id, @PathVariable Product products){
 
         return ResponseEntity.ok(productsService.updateProducts(id, products));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Products> deleteProducts(@PathVariable Long id){
+    public ResponseEntity<Product> deleteProducts(@PathVariable Long id){
         
         productsService.removeProducts(id);
         return ResponseEntity.noContent().build();

@@ -9,7 +9,7 @@ import api.ecommerce.br.apiecommerce.service.BrandService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/brand")
+@RequestMapping("brand")
 public class BrandController {
 
     @Autowired

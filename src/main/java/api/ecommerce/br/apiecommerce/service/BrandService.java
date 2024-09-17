@@ -16,26 +16,8 @@ public class BrandService {
     private BrandRepository brandRepository;
 
     public List<String> getNameCategoryByBrand(String category){
-        List<Brand> brandByCigarrets = brandRepository.findByCategory("cigarrets");
-        List<Brand> brandByBeers = brandRepository.findByCategory("beers");
-        
-        if(category.equalsIgnoreCase("cigarrets")){
-
-           return brandByCigarrets.stream()
-                .map(Brand::getName)
-                .collect(Collectors.toList());
-        }
-
-        if(category.equalsIgnoreCase("beers")){
-            
-            return brandByBeers.stream()
-                .map(Brand::getName)
-                .collect(Collectors.toList());
-        
-        }
-
-        return null;
-
+       
+        return this.brandRepository.findByName(category);
     }
 }
 

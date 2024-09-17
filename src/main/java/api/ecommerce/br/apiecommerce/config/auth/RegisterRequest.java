@@ -1,6 +1,6 @@
 package api.ecommerce.br.apiecommerce.config.auth;
 
-import api.ecommerce.br.apiecommerce.model.Products;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

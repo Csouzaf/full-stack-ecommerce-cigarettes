@@ -43,7 +43,7 @@ public class Brand {
     private List<Model> models;
 
     @OneToMany(mappedBy = "brand", fetch = FetchType.EAGER)
-    private List<Products> products;
+    private List<Product> products;
 
 
     
