@@ -6,6 +6,6 @@ import api.ecommerce.br.apiecommerce.model.PaymentProduct;
 
 
 @Repository
-public interface PaymentRepository extends JpaRepository<PaymentProduct, Long> {
+public interface PaymentRepository extends JpaRepository<PaymentProduct, String> {
    
 }

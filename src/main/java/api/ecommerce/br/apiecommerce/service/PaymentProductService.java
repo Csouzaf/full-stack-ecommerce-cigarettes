@@ -62,7 +62,7 @@ public class PaymentProductService {
 
     }
 
-    public PaymentProduct updateProducts(Long id, PaymentProduct payment) {
+    public PaymentProduct updateProducts(String id, PaymentProduct payment) {
 
         if (auth.verifyUserIsAuthenticated()) {
             PaymentProduct paymentProduct = paymentRepository.findById(id)
@@ -76,7 +76,7 @@ public class PaymentProductService {
         return null;
     }
 
-    public void removeProduct(Long id) {
+    public void removeProduct(String id) {
     
         if (auth.verifyUserIsAuthenticated() && auth.verifyIsAdminRole()) {
             PaymentProduct paymentProduct = paymentRepository.findById(id)

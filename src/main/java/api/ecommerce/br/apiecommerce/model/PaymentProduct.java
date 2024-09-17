@@ -12,11 +12,14 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.UUID;
 
 import java.time.LocalDateTime;
 
 import java.util.List;
-import org.hibernate.validator.constraints.UUID;
+
+import org.hibernate.id.uuid.UuidGenerator;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,10 +31,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class PaymentProduct {
     
-    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private String id;
     
     @Column(name = "tax")
     private Double tax;
@@ -54,6 +55,10 @@ public class PaymentProduct {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="products_id", nullable = false)
     private Product product;
+
+    public PaymentProduct() {
+        this.id = UUID.randomUUID().toString();
+    }
     
 
 }
