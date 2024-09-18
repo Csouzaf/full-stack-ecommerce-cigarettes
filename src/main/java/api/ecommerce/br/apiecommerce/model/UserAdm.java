@@ -17,13 +17,13 @@ import jakarta.validation.constraints.Pattern.Flag;
 import lombok.*;
 
 @Entity
-@Table(name = "common_user")
+@Table(name = "adm_user")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 
-public class UserModel implements UserDetails{
+public class UserAdm implements UserDetails{
    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -53,9 +53,6 @@ public class UserModel implements UserDetails{
 
     @NotEmpty(message = "Senha obrigatória")
     private String password;
-
-    @OneToOne(mappedBy = "userModel")
-    private UserEmail userEmail;
 
     @Enumerated(EnumType.STRING)
     private Role role;

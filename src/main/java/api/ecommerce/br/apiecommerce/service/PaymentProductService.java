@@ -27,29 +27,27 @@ public class PaymentProductService {
     @Autowired
     private PaymentRepository paymentRepository;
 
-    @Autowired
-    private PaymentProduct paymentProduct;
+    // @Autowired
+    // private PaymentProduct paymentProduct;
 
     @Autowired
     private VerifyAuthentication auth;
-    
+
     public List<PaymentProduct> listProducts() {
         return this.paymentRepository.findAll();
     }
 
-    double sum = 0.0;
-
     public PaymentProduct createPayment(List<Product> products, String methodPayment) {
-        if (auth.verifyUserIsAuthenticated()) {
 
+        if (auth.verifyUserIsAuthenticated()) {
+            PaymentProduct paymentProduct = new PaymentProduct();
             paymentProduct.setCurrentDate(LocalDateTime.now());
-            
-            products.stream().forEach( m-> {
-            
-                sum += m.getUnitaryValue() * m.getQuantityStock() ;
-            });
-            
-            //12% tax to products
+
+            double sum = products.stream()
+                    .mapToDouble(m -> m.getUnitaryValue() * m.getQuantityStock())
+                    .sum();
+
+            // 12% tax to products
             paymentProduct.setTax(sum * 1.12);
             paymentProduct.setAmountValue(sum);
             paymentProduct.setPaymentMethod(methodPayment);
@@ -58,6 +56,7 @@ public class PaymentProductService {
 
             return paymentProductsSave;
         }
+
         return null;
 
     }
@@ -68,16 +67,16 @@ public class PaymentProductService {
             PaymentProduct paymentProduct = paymentRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com ID: " + id));
 
-            //paymentProduct.setQuantityStock(payment.getQuantityStock());
+            // paymentProduct.setQuantityStock(payment.getQuantityStock());
 
             return paymentRepository.save(paymentProduct);
         }
-        
+
         return null;
     }
 
     public void removeProduct(String id) {
-    
+
         if (auth.verifyUserIsAuthenticated() && auth.verifyIsAdminRole()) {
             PaymentProduct paymentProduct = paymentRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com ID: " + id));

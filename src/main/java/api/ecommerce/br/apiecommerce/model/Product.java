@@ -2,6 +2,8 @@ package api.ecommerce.br.apiecommerce.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +21,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "products")
+@Table(name = "product")
 @Getter
 @Setter
 @ToString
@@ -40,6 +42,7 @@ public class Product {
     private String photo;
 
     @Column(name = "current_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime currentDate;
 
     @NotNull
@@ -50,13 +53,13 @@ public class Product {
     @Column(name = "unitary_Value")
     private Double unitaryValue;
     
-    @JsonIgnore
-    @OneToMany(mappedBy = "product")
-    List<Product> products;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private UserModel userModel;
+
+    // @JsonIgnore
+    // @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    // List<PaymentProduct> paymentProducts;
 
     @ManyToOne()
     private Brand brand;

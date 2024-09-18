@@ -6,10 +6,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import api.ecommerce.br.apiecommerce.config.jwt.JwtService;
 import api.ecommerce.br.apiecommerce.model.Role;
+import api.ecommerce.br.apiecommerce.model.UserAdm;
 import api.ecommerce.br.apiecommerce.model.UserEmail;
 import api.ecommerce.br.apiecommerce.model.UserModel;
+import api.ecommerce.br.apiecommerce.repository.UserAdminRepository;
 import api.ecommerce.br.apiecommerce.repository.UserEmailRepository;
 import api.ecommerce.br.apiecommerce.repository.UserRepository;
+import ch.qos.logback.core.joran.conditional.ElseAction;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -18,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class AuthenticationService {
      
     private final UserRepository repository;
+    private final UserAdminRepository userAdminRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -26,7 +30,9 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
 
-        var user = UserModel.builder()
+        if (request.getRole().equals("ADMIN")) {
+            
+            var userAdm = UserAdm.builder()
 
             .email(request.getEmail())
             .password(passwordEncoder.encode(request.getPassword()))
@@ -34,29 +40,54 @@ public class AuthenticationService {
             .fullName(request.getFullName())
             .phoneNumber(request.getPhoneNumber())
             .address(request.getAddress())
-            .role(Role.USER)
+            .role(Role.ADMIN)
             .build();
         
-        repository.save(user);
+            userAdminRepository.save(userAdm);
 
-        UserEmail userEmail = new UserEmail();
+            var jwtTokenAdm = jwtService.generatedToken(userAdm);
+            
+            return AuthenticationResponse.builder()
+                .token(jwtTokenAdm)
+                .build();
+        }
 
-        userEmail.setEmail(request.getEmail());
-        userEmail.setCpf(request.getCpf());
-        userEmail.setFullName(request.getFullName());
-        userEmail.setAddress(request.getAddress());
-        userEmail.setPhoneNumber(request.getPhoneNumber());
+        else {
 
-        userEmail.setUserModel(user);
+            var user = UserModel.builder()
+    
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .cpf(request.getCpf())
+                .fullName(request.getFullName())
+                .phoneNumber(request.getPhoneNumber())
+                .address(request.getAddress())
+                .role(Role.USER)
+                .build();
+            
+            repository.save(user);
+    
+    
+            UserEmail userEmail = new UserEmail();
+    
+            userEmail.setEmail(request.getEmail());
+            userEmail.setCpf(request.getCpf());
+            userEmail.setFullName(request.getFullName());
+            userEmail.setAddress(request.getAddress());
+            userEmail.setPhoneNumber(request.getPhoneNumber());
+    
+            userEmail.setUserModel(user);
+            
+            userEmailRepository.save(userEmail);
+
+            var jwtToken = jwtService.generatedToken(user);
+            
+            return AuthenticationResponse.builder()
+                .token(jwtToken)            
+                .build();
+        }
         
-        userEmailRepository.save(userEmail);
-        
-        var jwtToken = jwtService.generatedToken(user);
-        
-        return AuthenticationResponse.builder()
-            .token(jwtToken)
-            .build();
-
+    
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
@@ -66,11 +97,14 @@ public class AuthenticationService {
         );
 
         var user = repository.findByEmail(request.getEmail()).orElseThrow();
-        
+        var userAdm = userAdminRepository.findByEmail(request.getEmail()).orElseThrow();
+
         var jwtToken = jwtService.generatedToken(user);
-        
+        var jwtTokenAdm = jwtService.generatedToken(userAdm);
+
         return AuthenticationResponse.builder()
             .token(jwtToken)
+            .token(jwtTokenAdm)
             .build();
 
     }

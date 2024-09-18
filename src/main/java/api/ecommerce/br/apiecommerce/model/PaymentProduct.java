@@ -27,8 +27,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "payment")
 @Getter
 @Setter
-
-
 public class PaymentProduct {
     
     @Id
