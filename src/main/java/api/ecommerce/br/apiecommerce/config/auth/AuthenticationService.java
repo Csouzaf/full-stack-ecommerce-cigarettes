@@ -30,7 +30,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
 
-        if (request.getRole().equals("ADMIN")) {
+        if (request.getRole().equals("ADMINFULL")) {
             
             var userAdm = UserAdm.builder()
 
@@ -40,7 +40,7 @@ public class AuthenticationService {
             .fullName(request.getFullName())
             .phoneNumber(request.getPhoneNumber())
             .address(request.getAddress())
-            .role(Role.ADMIN)
+            .role(Role.ADMINFULL)
             .build();
         
             userAdminRepository.save(userAdm);
@@ -51,6 +51,30 @@ public class AuthenticationService {
                 .token(jwtTokenAdm)
                 .build();
         }
+
+        else if (request.getRole().equals("OWNER")) {
+            
+                var userAdm = UserAdm.builder()
+    
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .cpf(request.getCpf())
+                .cnpj(request.getCpf())
+                .fullName(request.getFullName())
+                .phoneNumber(request.getPhoneNumber())
+                .address(request.getAddress())
+                .role(Role.OWNER)
+                .build();
+            
+                userAdminRepository.save(userAdm);
+    
+                var jwtTokenAdm = jwtService.generatedToken(userAdm);
+                
+                return AuthenticationResponse.builder()
+                    .token(jwtTokenAdm)
+                    .build();
+            }
+        
 
         else {
 

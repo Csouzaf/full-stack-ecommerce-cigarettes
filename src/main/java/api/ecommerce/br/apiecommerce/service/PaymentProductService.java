@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import api.ecommerce.br.apiecommerce.config.auth.AuthenticationRequest;
 import api.ecommerce.br.apiecommerce.config.auth.AuthenticationService;
 import api.ecommerce.br.apiecommerce.config.auth.VerifyAuthentication;
+import api.ecommerce.br.apiecommerce.enums.PaymentMethod;
 import api.ecommerce.br.apiecommerce.exception.ResourceNotFoundException;
 import api.ecommerce.br.apiecommerce.model.PaymentProduct;
 import api.ecommerce.br.apiecommerce.model.Product;
@@ -27,8 +28,8 @@ public class PaymentProductService {
     @Autowired
     private PaymentRepository paymentRepository;
 
-    // @Autowired
-    // private PaymentProduct paymentProduct;
+    @Autowired
+    private ProductsRepository productRepository;
 
     @Autowired
     private VerifyAuthentication auth;
@@ -37,16 +38,23 @@ public class PaymentProductService {
         return this.paymentRepository.findAll();
     }
 
-    public PaymentProduct createPayment(List<Product> products, String methodPayment) {
+    public PaymentProduct createPayment(List<Product> products, PaymentMethod methodPayment) {
 
         if (auth.verifyUserIsAuthenticated()) {
             PaymentProduct paymentProduct = new PaymentProduct();
             paymentProduct.setCurrentDate(LocalDateTime.now());
+            
+            for (Product product : products) {
+                
+                productRepository.findByQuantityProducts(product.getId());
+                
+                productRepository.save(product);
+            }
 
             double sum = products.stream()
-                    .mapToDouble(m -> m.getUnitaryValue() * m.getQuantityStock())
+                    .mapToDouble(m -> m.getUnitaryValue() * m.getQuantityProducts())
                     .sum();
-
+            
             // 12% tax to products
             paymentProduct.setTax(sum * 1.12);
             paymentProduct.setAmountValue(sum);

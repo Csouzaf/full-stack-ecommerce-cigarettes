@@ -1,6 +1,8 @@
 package api.ecommerce.br.apiecommerce.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +25,8 @@ import org.hibernate.id.uuid.UuidGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import api.ecommerce.br.apiecommerce.enums.PaymentMethod;
+
 @Entity
 @Table(name = "payment")
 @Getter
@@ -44,7 +48,8 @@ public class PaymentProduct {
 
     @NotNull
     @Column(name = "payment_method")
-    private String paymentMethod;
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)

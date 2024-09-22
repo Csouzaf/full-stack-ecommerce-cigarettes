@@ -44,9 +44,12 @@ public class UserAdm implements UserDetails{
     private String phoneNumber;
 
     // @CPF
-    @NotEmpty(message = "CPF obrigatório")
-    @Column(name = "CPF", length = 11, unique = true)
+    @Column(name = "cpf", length = 11, unique = true)
     private String cpf;
+
+    @NotEmpty(message = "CNPJ obrigatório")
+    @Column(name = "cnpj", length = 14, unique = true)
+    private String cnpj;
 
     @NotEmpty(message = "Endereco obrigatório")
     private String address;
