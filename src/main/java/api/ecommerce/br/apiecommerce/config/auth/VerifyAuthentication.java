@@ -4,6 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import api.ecommerce.br.apiecommerce.model.UserAdm;
 import api.ecommerce.br.apiecommerce.model.UserModel;
 
 @Service
@@ -50,6 +51,14 @@ public class VerifyAuthentication {
         UserModel userModel = (UserModel) authentication.getPrincipal();
 
         return userModel;
+    }
+
+    public UserAdm userAdmAuthenticated() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserAdm userAdm = (UserAdm) authentication.getPrincipal();
+
+        return userAdm;
     }
 
 }

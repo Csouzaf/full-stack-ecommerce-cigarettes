@@ -54,8 +54,8 @@ public class Product {
     private Double unitaryValue;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserModel userModel;
+    @JoinColumn(name = "user_adm_id", nullable = false)
+    private UserAdm userAdm;
 
     // @JsonIgnore
     // @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)

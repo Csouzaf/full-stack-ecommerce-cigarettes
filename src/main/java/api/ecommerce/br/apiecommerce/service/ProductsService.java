@@ -29,8 +29,8 @@ public class ProductsService {
         if (auth.verifyUserIsAuthenticated() && auth.verifyIsAdminRole() || auth.verifyIsOwnerRole()) {
             
             products.setCurrentDate(LocalDateTime.now());
-            products.setUserModel(auth.userAuthenticated());
-
+            products.setUserAdm(auth.userAdmAuthenticated());
+            
             Product productsSave = productsRepository.save(products);
             return productsSave;
         }

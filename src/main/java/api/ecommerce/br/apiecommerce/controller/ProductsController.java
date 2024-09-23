@@ -33,6 +33,10 @@ public class ProductsController {
 
 
         Product createProducts = productsService.createProducts(products);
+
+        if (createProducts == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
         
         return ResponseEntity.status(HttpStatus.CREATED).body(createProducts);
 
