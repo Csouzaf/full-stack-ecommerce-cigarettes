@@ -2,6 +2,7 @@ package api.ecommerce.br.apiecommerce.config.auth;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import api.ecommerce.br.apiecommerce.config.jwt.JwtService;
@@ -59,7 +60,7 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .cpf(request.getCpf())
-                .cnpj(request.getCpf())
+                .cnpj(request.getCnpj())
                 .fullName(request.getFullName())
                 .phoneNumber(request.getPhoneNumber())
                 .address(request.getAddress())
@@ -115,19 +116,26 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(
+        
+       authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         
         );
 
-        var user = repository.findByEmail(request.getEmail()).orElseThrow();
-        var userAdm = userAdminRepository.findByEmail(request.getEmail()).orElseThrow();
+      
+        if (repository.findByEmail(request.getEmail()) != null) {
 
-        var jwtToken = jwtService.generatedToken(user);
-        var jwtTokenAdm = jwtService.generatedToken(userAdm);
-
-        return AuthenticationResponse.builder()
+            var jwtToken = jwtService.generatedToken(repository.findByEmail(request.getEmail()));
+            
+            return AuthenticationResponse.builder()
             .token(jwtToken)
+            .build();
+        }
+
+        var userAdm = userAdminRepository.findByEmail(request.getEmail());
+        var jwtTokenAdm = jwtService.generatedToken(userAdm);
+        
+        return AuthenticationResponse.builder()
             .token(jwtTokenAdm)
             .build();
 

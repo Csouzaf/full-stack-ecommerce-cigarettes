@@ -26,9 +26,10 @@ public class ProductsService {
 
     public Product createProducts(Product products) {
 
-        if (auth.verifyUserIsAuthenticated() && auth.verifyIsAdminRole()) {
+        if (auth.verifyUserIsAuthenticated() && auth.verifyIsAdminRole() || auth.verifyIsOwnerRole()) {
             
             products.setCurrentDate(LocalDateTime.now());
+            products.setUserModel(auth.userAuthenticated());
 
             Product productsSave = productsRepository.save(products);
             return productsSave;

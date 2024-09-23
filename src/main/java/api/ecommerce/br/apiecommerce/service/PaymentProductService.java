@@ -14,6 +14,7 @@ import api.ecommerce.br.apiecommerce.config.auth.AuthenticationService;
 import api.ecommerce.br.apiecommerce.config.auth.VerifyAuthentication;
 import api.ecommerce.br.apiecommerce.enums.PaymentMethod;
 import api.ecommerce.br.apiecommerce.exception.ResourceNotFoundException;
+import api.ecommerce.br.apiecommerce.model.OrderPaymentProduct;
 import api.ecommerce.br.apiecommerce.model.PaymentProduct;
 import api.ecommerce.br.apiecommerce.model.Product;
 import api.ecommerce.br.apiecommerce.repository.PaymentRepository;
@@ -62,6 +63,11 @@ public class PaymentProductService {
 
             PaymentProduct paymentProductsSave = paymentRepository.save(paymentProduct);
 
+            OrderPaymentProduct order = new OrderPaymentProduct();
+
+            order.setCurrentDate(LocalDateTime.now());
+            order.setPaymentProduct(paymentProductsSave);
+            order.setUserModel(auth.userAuthenticated());
             return paymentProductsSave;
         }
 

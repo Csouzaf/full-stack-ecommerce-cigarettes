@@ -7,11 +7,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import api.ecommerce.br.apiecommerce.model.UserAdm;
+import api.ecommerce.br.apiecommerce.model.UserModel;
+import api.ecommerce.br.apiecommerce.repository.UserAdminRepository;
 import api.ecommerce.br.apiecommerce.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -22,12 +26,26 @@ import lombok.RequiredArgsConstructor;
 public class ApplicationConfig {
 
     private final UserRepository repository;
+    
+    private final UserAdminRepository userAdminRepository;
 
     @Bean
     public UserDetailsService userDetailsService() {
-       return username -> repository.findByEmail(username)
-            .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
-      
+     
+      return username -> {
+            UserModel userModel = repository.findByEmail(username); 
+            if (userModel != null) {
+                return (UserDetails) userModel; 
+            }
+
+            UserAdm userAdm = userAdminRepository.findByEmail(username);
+            if (userAdm != null) {
+                return (UserDetails) userAdm; 
+            }
+
+            throw new UsernameNotFoundException("Usuário não encontrado");
+        };
+           
     }
 
     @Bean
