@@ -47,10 +47,19 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		
+<!--		Para vscode
+			<dependency>-->
+<!--			<groupId>org.projectlombok</groupId>-->
+<!--			<artifactId>lombok</artifactId>-->
+<!--			<optional>true</optional>-->
+<!--		</dependency>-->
+	
+	<!--		Loombok Para Eclipse-->	
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<version>1.18.34</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -95,7 +104,12 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<image>
+                        <name>sampleimage</name>
+                    </image>
+					
 				</configuration>
+			
 			</plugin>
 		</plugins>
 	</build>
