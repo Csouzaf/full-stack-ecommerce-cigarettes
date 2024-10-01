@@ -66,20 +66,6 @@ public class FavoriteService {
     }
     
 
-    public Favorite update(Long id, Product product) {
-
-        if (auth.verifyUserIsAuthenticated()) {
-            Favorite favorite = favoriteRepository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com ID: " + id));
-            
-            favorite.setProduct(product);
-
-            return favoriteRepository.saveAndFlush(favorite);
-        }
-
-        return null;
-    }
-
     public void remove(Long id) {
 
         if (auth.verifyUserIsAuthenticated()) {

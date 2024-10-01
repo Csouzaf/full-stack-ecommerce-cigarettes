@@ -38,12 +38,6 @@ public class FavoriteController {
 
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateProducts(@PathVariable Long id, @PathVariable Product products){
-
-        return ResponseEntity.ok(favoriteService.update(id, products));
-    }
-
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Product> deleteProducts(@PathVariable Long id){
         
