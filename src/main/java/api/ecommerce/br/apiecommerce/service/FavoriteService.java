@@ -39,10 +39,10 @@ public class FavoriteService {
     @Autowired
     private VerifyAuthentication auth;
 
-    public List<Favorite> listProducts(int userId) {
+    public List<Favorite> listProducts(Long productId, Long userId) {
     	 if (auth.verifyUserIsAuthenticated()) {
     		 
-    		 return this.favoriteRepository.findByUserModel(userId);
+    		return this.favoriteRepository.findByProductIdAndUserModelId(productId, userId);
     		 
     	 }
         return null;

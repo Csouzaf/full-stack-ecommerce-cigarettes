@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  # Define your Spring Boot application
+  app:
+    build: .
+    ports:
+      - "8080:8080"  # Map the host's port 8080 to the container's port 8080
+    depends_on:
+      - db  # Wait for the db service to be ready
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/ecommerce_cigarretes
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: MainUser
+    networks:
+      - app-network
+
+  # Define the PostgreSQL service
+  db:
+    image: postgres:15  # Use the official PostgreSQL image
+    environment:
+      POSTGRES_DB: ecommerce_cigarretes  # Database name
+      POSTGRES_USER: postgres  # Database username
+      POSTGRES_PASSWORD: MainUser  # Database password
+    ports:
+      - "5432:5432"  # Map the host's port 5432 to the container's port 5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data  # Persist data in a Docker volume
+    networks:
+      - app-network
+
+# Create a shared network so services can talk to each other
+networks:
+  app-network:
+
+# Persist PostgreSQL data using a volume
+volumes:
+  postgres-data:

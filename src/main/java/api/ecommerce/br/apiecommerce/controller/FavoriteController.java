@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException.BadRequest;
+
 import api.ecommerce.br.apiecommerce.controller.response.ProductsResponse;
 import api.ecommerce.br.apiecommerce.model.Favorite;
 import api.ecommerce.br.apiecommerce.model.Product;
@@ -19,9 +21,16 @@ public class FavoriteController {
     private FavoriteService favoriteService;
 
     @GetMapping()
-    public ResponseEntity<List<Favorite>> listproducts(int userId){
+    public ResponseEntity<List<Favorite>> listproducts(Long productId, Long userId){
 
-        return ResponseEntity.ok().body(favoriteService.listProducts(userId));
+        List<Favorite> favorites = favoriteService.listProducts(productId, userId);
+        
+        if (favorites == null) {
+            return new ResponseEntity("Usuário não autenticado ou produto e usuário sem favorito", HttpStatus.BAD_REQUEST);
+        }
+        
+        return ResponseEntity.ok().body(favorites);
+     
     }
 
     @PostMapping()

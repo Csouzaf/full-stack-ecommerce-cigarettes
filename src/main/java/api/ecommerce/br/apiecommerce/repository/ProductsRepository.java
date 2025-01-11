@@ -9,5 +9,5 @@ import api.ecommerce.br.apiecommerce.model.Product;
 @Repository
 public interface ProductsRepository extends JpaRepository<Product, Long> {
 
-    Product findByQuantityProducts(Long quantityProduct);
+    int findByQuantityStock(Long quantityStock);
 }

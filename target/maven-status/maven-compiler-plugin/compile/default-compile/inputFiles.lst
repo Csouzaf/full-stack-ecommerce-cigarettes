@@ -1,28 +1,47 @@
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\repository\ProductsRepository.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\controller\ProductsController.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\Products.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\Role.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\auth\AuthenticationService.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\auth\AuthenticationResponse.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\auth\AuthenticationRequest.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\AnswerModel.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\SecurityUserConfig.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\jwt\JwTAuthenticationFilter.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\ApiecomerceApplication.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\UserModel.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\repository\UserUpdateDeleteRepository.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\service\CartService.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\jwt\ApplicationConfig.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\auth\RegisterRequest.java
-
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\repository\UserEmailRepository.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\service\UserService.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\ProductsUser.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\jwt\JwtService.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\UserEmail.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\service\ProductsService.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\controller\UserController.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\auth\AuthenticationController.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\exception\ResourceNotFoundException.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\repository\UserRepository.java
-d:\OneDrive\Programaï¿½ï¿½o\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\jwt\SecretUserKey.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\controller\UserController.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\auth\RegisterRequest.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\jwt\JwtService.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\repository\BrandRepository.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\repository\UserUpdateDeleteRepository.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\auth\AuthenticationService.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\Product.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\Favorite.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\auth\VerifyAuthentication.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\UserAdm.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\service\ProductsService.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\controller\FavoriteController.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\repository\FavoriteRepository.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\repository\UserRepository.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\service\SaleReportService.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\jwt\ApplicationConfig.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\enums\Cigarrets.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\PaymentProduct.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\repository\UserEmailRepository.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\SaleReportModel.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\service\UserService.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\AnswerModel.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\Model.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\controller\response\ProductsResponse.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\jwt\JwTAuthenticationFilter.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\controller\ProductsController.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\repository\UserAdminRepository.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\auth\AuthenticationController.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\SecurityUserConfig.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\service\BrandService.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\repository\ProductsRepository.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\repository\OrderPaymentRepository.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\exception\ProductsException.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\UserEmail.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\enums\PaymentMethod.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\auth\AuthenticationRequest.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\Brand.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\OrderPaymentProduct.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\repository\PaymentRepository.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\exception\ResourceNotFoundException.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\Role.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\controller\BrandController.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\service\FavoriteService.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\ApiecomerceApplication.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\service\PaymentProductService.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\model\UserModel.java
+D:\Arquivos e Programas\Programação\Projeto Ecommerce com Springbot\ecommerce-cigarettes\src\main\java\api\ecommerce\br\apiecommerce\config\auth\AuthenticationResponse.java

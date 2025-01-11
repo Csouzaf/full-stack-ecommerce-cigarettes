@@ -47,8 +47,7 @@ public class PaymentProductService {
             
             for (Product product : products) {
                 
-                productRepository.findByQuantityProducts(product.getId());
-                
+                product.setQuantityStock(productRepository.findByQuantityStock(product.getId()) - product.getQuantityProducts());
                 productRepository.save(product);
             }
 

@@ -34,6 +34,7 @@ public class SecurityUserConfig {
                 .requestMatchers("/products/**").permitAll()
                 .requestMatchers("/brand/**").permitAll()
                 .requestMatchers("/payment/**").permitAll()
+                .requestMatchers("/api/mercadopago/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
